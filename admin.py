@@ -12,6 +12,6 @@ def main1():
 
 
 def check_admin():
-    c = check_admin()
-    if c == 1:
-        main1()
+    checkAdmin()
+    main1()
+

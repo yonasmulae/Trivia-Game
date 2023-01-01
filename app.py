@@ -16,9 +16,7 @@ def main():
         elif choice == 3:
             print("Thankyou for playing.")
             break
-        else:
-            print("Invalid Input! Tryagain.")
 
 
-main()
+
 

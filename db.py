@@ -82,7 +82,9 @@ class question():
         my_cursor.execute(query)
 
     def insert_question(self, ID, Category, Question, Choice1, Choice2, Choice3, Choice4, Answer):
-        query = "insert into trivia values({},'{}','{}','{}','{}','{}','{}','{}')".format(ID, Category, Question, Choice1, Choice2, Choice3, Choice4, Answer)
+        query = "insert into trivia values({},'{}','{}','{}','{}','{}','{}','{}')".format(ID, Category, Question,
+                                                                                          Choice1, Choice2, Choice3,
+                                                                                          Choice4, Answer)
         my_cursor = self.con.cursor()
         my_cursor.execute(query)
         self.con.commit()
@@ -117,9 +119,9 @@ class players():
         my_curser.execute(query)
         self.con.commit()
 
-        querycategory = "select distinct(Category) from trivia"
+        query_category = "select distinct(Category) from trivia"
         my_curser = self.con.cursor()
-        my_curser.execute(querycategory)
+        my_curser.execute(query_category)
         print("please select category for the trivia game")
         for i in my_curser:
             print(i[0])
@@ -131,17 +133,16 @@ class players():
         score = 0
         for row in my_curser:
             print("Question: ", row[2])
-            print("option1: ", row[3])
-            print("option2: ", row[4])
-            print("option3: ", row[5])
-            print("option4: ", row[6])
+            print("Choice 1: ", row[3])
+            print("Choice 2: ", row[4])
+            print("Choice 3: ", row[5])
+            print("Choice 4: ", row[6])
             print()
-            choice = int(input("Enter the correct option: "))
-            # if row[1].lower() == "Category":
-            if choice == row[7]:
-                score += 1
+            num = (input(f"Enter options : "))
+            if num not in row[7]:
+                print("incorrect")
             else:
-                pass
+                score += 1
 
         query1 = "update player set score={} where player_name='{}'".format(score, player_name)
         my_curser = self.con.cursor()
@@ -170,9 +171,6 @@ class players():
                 print()
 
 
-# player = players()
-
-
 class Show_user_score:
     def __init__(self):
         self.con = mysql.connector.connect(host="localhost", user="root", password="yonasamare7", database="yonidb")
@@ -183,15 +181,3 @@ class Show_user_score:
             print("player name: ", row[0])
             print("player score: ", row[1])
             print()
-
-
-
-
-
-
-
-
-
-
-
-
